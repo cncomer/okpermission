@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="okpermission_camera">相机授权提示</string>
+    <string name="okpermission_camera_rationale">为了实现扫一扫、设置头像、设置遥控器图片、发送带图或视频附件等功能，需要访问拍摄照片和录制权限。您如果拒绝开启，将无法使用上述功能。</string>
+
+    <string name="okpermission_bluetooth">蓝牙、位置信息授权提示</string>
+    <string name="okpermission_bluetooth_rationale">为了实现扫描、连接蓝牙设备，并与其相互传输数据，需要访问蓝牙相关权限。然而对于Android 10这些相对偏旧的系统，还必须访问位置相关权限。您如果拒绝开启，将无法使用上述功能。</string>
+
+    <string name="okpermission_bluetooth_nearby">附近的设备授权提示</string>
+    <string name="okpermission_bluetooth_nearby_rationale">为了扫描、连接蓝牙设备，并与其相互传输数据，需要访问附近的设备权限。您如果拒绝开启，将无法使用上述功能。</string>
+
+    <string name="okpermission_bluetooth_nearby_location">附近的设备、位置信息授权提示</string>
+    <string name="okpermission_bluetooth_nearby_location_rationale">为了实现扫描、连接蓝牙设备，并与其相互传输数据，需要访问附近的设备权限。由于涉及到设备的一些位置相关信息，所以还需要访问位置权限。您如果拒绝开启，将无法使用上述功能。</string>
+
+    <string name="okpermission_location">位置信息授权提示</string>
+    <string name="okpermission_location_rationale">为了获取WiFi连接信息(比如网络名称)和向您提供位置相关的个性化便捷服务，需要访问您的位置权限。您如果拒绝开启，将无法使用上述功能。</string>
+
+</resources>

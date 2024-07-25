@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:orientation="vertical"
+    android:layout_margin="16dip"
+    app:contentPadding="16dip"
+    app:cardCornerRadius="16dip"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/ThemeOverlay.AppCompat.Light"
+    app:cardBackgroundColor="?android:attr/colorBackground"
+    android:layout_height="wrap_content">
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/rational_root"
+        android:layout_width="fill_parent"
+        android:orientation="vertical"
+        app:divider="@drawable/permission_item_transparent_divider"
+        app:showDividers="middle"
+        android:layout_height="wrap_content">
+        <include layout="@layout/request_permission_rationale_item"/>
+        <include layout="@layout/request_permission_rationale_item"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.cardview.widget.CardView>

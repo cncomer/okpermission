@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="okpermission_camera">Camera permission prompt</string>
+    <string name="okpermission_camera_rationale">In order to achieve functions such as scanning, setting avatars, setting remote control images, and sending attachments with pictures or videos, APP needs access your photo taking and recording permissions. Otherwise, you will not be able to use the above functions.</string>
+
+
+    <string name="okpermission_bluetooth">"Bluetooth &amp; Location permissions prompt"</string>
+    <string name="okpermission_bluetooth_rationale">In order to achieve functions such as scanning, connecting bluetooth devices and exchanging data with them, APP needs access your bluetooth related permissions。However, for older systems like Android 10, location related permissions are also required. Otherwise, you will not be able to use the above functions.</string>
+
+    <string name="okpermission_bluetooth_nearby">Nearby devices permission prompt</string>
+    <string name="okpermission_bluetooth_nearby_rationale">In order to achieve functions such as scanning, connecting bluetooth devices and exchanging data with them, APP needs access your nearby devices permission. Otherwise, you will not be able to use the above functions.</string>
+
+    <string name="okpermission_bluetooth_nearby_location">"Nearby devices &amp; Location permissions prompt"</string>
+    <string name="okpermission_bluetooth_nearby_location_rationale">In order to achieve functions such as scanning, connecting bluetooth devices and exchanging data with them, APP needs access your nearby devices permission. Due to the involvement of some location related information of the device, location related permissions are also required. Otherwise, you will not be able to use the above functions.</string>
+
+    <string name="okpermission_location">Location permission prompt</string>
+    <string name="okpermission_location_rationale">In order to obtain the WiFi connection information such as SSID, and provide personalized and convenient services related to location, APP needs access to your Location permission. Otherwise, you will not be able to use the above functions.</string>
+</resources>

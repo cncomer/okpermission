@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:orientation="vertical"
+    android:theme="@style/ThemeOverlay.AppCompat.Light"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/permission_name"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:text="&lt;权限名称&gt;"
+        />
+    <TextView
+        android:id="@+id/permission_rational"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        tools:text="&lt;权限申请的使用目的&gt;"
+        />
+</LinearLayout>

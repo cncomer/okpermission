@@ -1,0 +1,107 @@
+plugins {
+    id 'com.android.library'
+//    id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
+}
+
+android {
+    namespace 'com.cncom.app.okpermission'
+
+    compileSdkVersion 34
+
+    defaultConfig {
+        minSdkVersion 21
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+//    kotlinOptions {
+//        jvmTarget = '1.8'
+//    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.annotation:annotation:1.1.0'
+}
+
+// 在maven-publish插件的基础使用中是不包含上传aar包的源码。
+// 增加上传源码的task，如：
+tasks.register("sourceJar", Jar) {
+    // 通过 android.sourceSets.main.java.srcDirs 指定的源码，只能识别到 Java 文件，而 kt 文件被忽略了，但 通过查看官方文档可以知道，from 函数是可以指定源码路径的，
+    // 所以这里直接把 from 函数的参数替换为 源码路径，如以下代码
+    from android.sourceSets.main.java.getSrcDirs() // 源码路径
+    archiveClassifier = "sources"
+}
+
+//publishing用于配置项目发布相关信息，可以配置的信息有两个：repositories 和 publications
+publishing {
+    // 配置maven 仓库
+    repositories {
+        // 本地仓库位于USER_HOME/.m2/repository
+        mavenLocal()
+//        // 其他maven仓库
+//        maven { url uri('/Users/h__d/Desktop/1') }
+//        // aliyun镜像仓库
+//        maven {
+//            // 凭证 访问仓库的 账号和密码
+//            credentials {
+//                username 'username' // 仓库发布用户名
+//                password 'password' // 仓库发布用户密码
+//            }
+//            // 仓库地址
+//            url 'https://maven.aliyun.com/nexus/content/groups/public/'
+//        }
+
+    }
+
+    // 配置需要发布的jar的信息，即aar包的信息。publications是一个容器，类型是 PublicationContainer，其可以配置的信息类型是MavenPublication，可以理解成是一个列表集合，
+    // 而集合中存储的对象是 MavenPublication，而对象的名称可以由自己随便定义。 所以 publications 也是可以配置多个的，如：release
+    publications {
+        // 任务名称：release  （名称可以随便定义）比如release表示发布正式包，debug表示snapshot包
+        release(MavenPublication) {
+            // 上传指定aar包的方式有两种
+            // 依赖 bundleReleaseAar 任务，并上传其产出的aar
+            afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) } // 方式一：生成aar包
+            // artifact "$buildDir/outputs/aar/${project.name}-release.aar" // 方式二：指定生成的aar路径
+            groupId = "com.github.cncomer"
+            artifactId = "okpermission"
+            version = "1.0.0"
+
+            artifact sourceJar
+            // 依赖传递
+            // 经过基础与上传源码后，是能正常依赖与使用的，但是aar包原本依赖的一下第三方包是不会自动依赖，需要手动添加依赖。
+            // 把library中的依赖信息，手动添加到 pom 文件中，就可以完成依赖传递，如下：
+            // pom文件中声明依赖，从而传递到使用方，注意需要--no-configuration-cache选项
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
+                configurations.implementation.allDependencies.each {
+                    // 避免出现空节点或 artifactId=unspecified 的节点
+                    if (it.group != null && (it.name != null && "unspecified" != it.name) && it.version != null) {
+                        println "dependency=${it.toString()}"
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', it.group)
+                        dependencyNode.appendNode('artifactId', it.name)
+                        dependencyNode.appendNode('version', it.version)
+                        dependencyNode.appendNode('scope', 'implementation')
+                    }
+                }
+            }
+        }
+    }
+}
